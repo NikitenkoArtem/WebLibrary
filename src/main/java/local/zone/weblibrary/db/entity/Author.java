@@ -19,11 +19,11 @@ public class Author extends Person implements Serializable {
     }
 
     public Author(Integer personId, String firstName, String lastName, String middleName, String sex, Date birthDate, String phoneNumber, String email, Address address, String nationality, Passport passport, String placeOfBirth) {
-        super(personId, firstName, lastName, middleName, sex, birthDate, phoneNumber, email, address, nationality, passport, placeOfBirth);
+        super(firstName, lastName, middleName, sex, birthDate, phoneNumber, email, address, passport);
     }
 
     public Author(Integer personId, String firstName, String lastName, String middleName, String sex, Date birthDate, String phoneNumber, String email, Address address, String nationality, Passport passport, String placeOfBirth, Integer authorId, Integer isbn) {
-        super(personId, firstName, lastName, middleName, sex, birthDate, phoneNumber, email, address, nationality, passport, placeOfBirth);
+        super(firstName, lastName, middleName, sex, birthDate, phoneNumber, email, address, passport);
         this.authorId = authorId;
         this.isbn = isbn;
     }

@@ -1,30 +1,42 @@
 package local.zone.weblibrary.db.entity;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by artem on 1.2.17.
  */
+
+@Entity
+@Table(name = "persons")
 public class Person implements Serializable {
-    private Integer personId;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "first_name", nullable = false)
     private String firstName;
+    @Column(name = "last_name", nullable = false)
     private String lastName;
+    @Column(name = "middle_name")
     private String middleName;
+
+    // TODO: char or string???
+    @Column
     private String sex;
+
+
     private Date birthDate;
     private String phoneNumber;
     private String email;
     private Address address;
-    private String nationality;
     private Passport passport;
-    private String placeOfBirth;
 
     public Person() {
     }
 
-    public Person(Integer personId, String firstName, String lastName, String middleName, String sex, Date birthDate, String phoneNumber, String email, Address address, String nationality, Passport passport, String placeOfBirth) {
-        this.personId = personId;
+    public Person(String firstName, String lastName, String middleName, String sex, Date birthDate, String phoneNumber, String email, Address address, Passport passport) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
@@ -33,17 +45,7 @@ public class Person implements Serializable {
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.address = address;
-        this.nationality = nationality;
         this.passport = passport;
-        this.placeOfBirth = placeOfBirth;
-    }
-
-    public Integer getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Integer personId) {
-        this.personId = personId;
     }
 
     public String getFirstName() {
@@ -110,14 +112,6 @@ public class Person implements Serializable {
         this.address = address;
     }
 
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
     public Passport getPassport() {
         return passport;
     }
@@ -126,29 +120,4 @@ public class Person implements Serializable {
         this.passport = passport;
     }
 
-    public String getPlaceOfBirth() {
-        return placeOfBirth;
-    }
-
-    public void setPlaceOfBirth(String placeOfBirth) {
-        this.placeOfBirth = placeOfBirth;
-    }
-
-    @Override
-    public String toString() {
-        return "Person{" +
-                "personId=" + personId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", middleName='" + middleName + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthDate=" + birthDate +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", address=" + address +
-                ", nationality='" + nationality + '\'' +
-                ", passport=" + passport +
-                ", placeOfBirth='" + placeOfBirth + '\'' +
-                '}';
-    }
 }
