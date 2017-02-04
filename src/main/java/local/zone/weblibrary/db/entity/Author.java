@@ -1,46 +1,58 @@
 package local.zone.weblibrary.db.entity;
 
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
-import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by artem on 1.2.17.
  */
-public class Author extends Person implements Serializable {
-    private Integer authorId;
-    private Integer isbn;
+
+@Entity
+@Table(name = "authors")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class Author implements Serializable {
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "person_id")
+    @OneToOne(mappedBy = "persons")
+    @XmlElement
+    private Person person;
 
     public Author() {
     }
 
-    public Author(Integer authorId, Integer isbn) {
-        this.authorId = authorId;
-        this.isbn = isbn;
+    public Author(Person person) {
+        this.person = person;
     }
 
-    public Author(Integer personId, String firstName, String lastName, String middleName, String sex, Date birthDate, String phoneNumber, String email, Address address, String nationality, Passport passport, String placeOfBirth) {
-        super(firstName, lastName, middleName, sex, birthDate, phoneNumber, email, address, passport);
+    public Long getId() {
+        return id;
     }
 
-    public Author(Integer personId, String firstName, String lastName, String middleName, String sex, Date birthDate, String phoneNumber, String email, Address address, String nationality, Passport passport, String placeOfBirth, Integer authorId, Integer isbn) {
-        super(firstName, lastName, middleName, sex, birthDate, phoneNumber, email, address, passport);
-        this.authorId = authorId;
-        this.isbn = isbn;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Integer getAuthorId() {
-        return authorId;
+    public Person getPerson() {
+        return person;
     }
 
-    public void setAuthorId(Integer authorId) {
-        this.authorId = authorId;
+    public void setPerson(Person person) {
+        this.person = person;
     }
 
-    public Integer getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(Integer isbn) {
-        this.isbn = isbn;
+    @Override
+    public String toString() {
+        return "Author{" +
+                "id=" + id +
+                ", person=" + person +
+                '}';
     }
 }

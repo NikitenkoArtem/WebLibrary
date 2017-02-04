@@ -9,11 +9,43 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "readers")
-public class Reader extends Person implements Serializable {
+public class Reader implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @OneToOne
+    @JoinColumn(name = "person_id")
+    private Person person;
 
-    private History history;
+    public Reader() {
+    }
+
+    public Reader(Person person) {
+        this.person = person;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
+
+    @Override
+    public String toString() {
+        return "Reader{" +
+                "id=" + id +
+                ", person=" + person +
+                '}';
+    }
 }

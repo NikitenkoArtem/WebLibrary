@@ -1,42 +1,74 @@
 package local.zone.weblibrary.db.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by artem on 1.2.17.
  */
+@Entity
+@Table(name = "books")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Book implements Serializable {
-    private Integer isbn;
+    @Id
+    @Column
+    @XmlElement
+    private Long isbn;
+    @Column(unique = true)
+    @XmlElement
     private Integer lbc;
+    @Column(unique = true)
+    @XmlElement
     private Integer udc;
+    @Column(nullable = false)
+    @XmlElement
     private String name;
-    private Author authorId;
+    @Column
+    @XmlElement
+    private Author author;
+    @Column
+    @XmlElement
     private String publisher;
+    @Column(name = "publish_date")
+    @XmlElement
     private Date publishDate;
-    private Library libraryId;
+    @Column(name = "page_amount")
+    @XmlElement
     private Integer pageAmount;
 
     public Book() {
     }
 
-    public Book(Integer isbn, Integer lbc, Integer udc, String name, Author authorId, String publisher, Date publishDate, Library libraryId, Integer pageAmount) {
+    public Book(Long isbn, String name) {
+        this.isbn = isbn;
+        this.name = name;
+    }
+
+    public Book(Long isbn, Integer lbc, Integer udc, String name, Author author, String publisher, Date publishDate, Integer pageAmount) {
         this.isbn = isbn;
         this.lbc = lbc;
         this.udc = udc;
         this.name = name;
-        this.authorId = authorId;
+        this.author = author;
         this.publisher = publisher;
         this.publishDate = publishDate;
-        this.libraryId = libraryId;
         this.pageAmount = pageAmount;
     }
 
-    public Integer getIsbn() {
+    public Long getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Integer isbn) {
+    public void setIsbn(Long isbn) {
         this.isbn = isbn;
     }
 
@@ -64,12 +96,12 @@ public class Book implements Serializable {
         this.name = name;
     }
 
-    public Author getAuthorId() {
-        return authorId;
+    public Author getAuthor() {
+        return author;
     }
 
-    public void setAuthorId(Author authorId) {
-        this.authorId = authorId;
+    public void setAuthor(Author author) {
+        this.author = author;
     }
 
     public String getPublisher() {
@@ -88,19 +120,25 @@ public class Book implements Serializable {
         this.publishDate = publishDate;
     }
 
-    public Library getLibraryId() {
-        return libraryId;
-    }
-
-    public void setLibraryId(Library libraryId) {
-        this.libraryId = libraryId;
-    }
-
     public Integer getPageAmount() {
         return pageAmount;
     }
 
     public void setPageAmount(Integer pageAmount) {
         this.pageAmount = pageAmount;
+    }
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "isbn=" + isbn +
+                ", lbc=" + lbc +
+                ", udc=" + udc +
+                ", name='" + name + '\'' +
+                ", author=" + author +
+                ", publisher='" + publisher + '\'' +
+                ", publishDate=" + publishDate +
+                ", pageAmount=" + pageAmount +
+                '}';
     }
 }
