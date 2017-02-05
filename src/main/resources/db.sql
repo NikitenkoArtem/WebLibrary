@@ -1,3 +1,6 @@
+CREATE SCHEMA weblibrary DEFAULT CHARACTER SET utf8;
+use weblibrary;
+
 CREATE TABLE addresses (
     id int not null auto_increment
     , state varchar(100) not null
@@ -32,7 +35,7 @@ create table persons (
     , phone_number int
     , email varchar(100)
     , address_id int
-    , passport_id int
+    , passport_id varchar(14) not null
     , constraint FK_ADDRESS_ID_PERSONS foreign key (address_id) references addresses (id) on delete cascade
     , constraint FK_PASSPORT_ID_PERSONS foreign key (passport_id) references passports (id) on delete cascade
     , constraint PK_PERSONS primary key (id)
@@ -42,6 +45,12 @@ create table authors (
     id int not null auto_increment
     , person_id int not null
     , constraint FK_AUTHORS foreign key (person_id) references persons (id) on delete cascade
+    , constraint PK_AUTHORS primary key (id)
+);
+
+create table libraries (
+    id int not null auto_increment
+    , name varchar(100) not null
     , constraint PK_AUTHORS primary key (id)
 );
 
@@ -58,12 +67,6 @@ create table books (
     , constraint FK_AUTHOR_ID_BOOKS foreign key (author_id) references authors (id) on delete cascade
     , constraint FK_LIBRARY_ID_BOOKS foreign key (library_id) references libraries (id) on delete cascade
     , constraint PK_BOOKS primary key (isbn)
-);
-
-create table libraries (
-    id int not null auto_increment
-    , name varchar(100) not null
-    , constraint PK_AUTHORS primary key (id)
 );
 
 create table librarians (
@@ -87,9 +90,9 @@ create table readers (
 create table histories (
     id int not null
     , reader_id int not null
-    , book_id int not null
+    , book_isbn int not null
     , is_book_come_back bit(1) not null
-    , constraint FK_READER_ID_HISTORIES foreign key (id) references readers (id) on delete cascade
-    , constraint FK_BOOK_ID_HISTORIES foreign key (id) references books (id) on delete cascade
+    , constraint FK_READER_ID_HISTORIES foreign key (reader_id) references readers (id) on delete cascade
+    , constraint FK_BOOK_ID_HISTORIES foreign key (book_isbn) references books (isbn) on delete cascade
     , constraint PK_HISTORIES primary key (id)
 );

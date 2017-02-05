@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by artem on 4.2.17.
  */
-public class LibraryDaoImpl implements LibraryDao<Library, Long> {
+public class LibraryDaoImpl implements LibraryDao {
     private SessionFactory sessionFactory;
 
     @Override
@@ -36,6 +36,11 @@ public class LibraryDaoImpl implements LibraryDao<Library, Long> {
     @Override
     public void delete(Library entity) {
 
+    }
+
+    @Override
+    public Library findLibraryByName(String name) {
+        return null;
     }
 
     public SessionFactory getSessionFactory() {

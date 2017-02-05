@@ -4,4 +4,49 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <servlet>
+        <servlet-name>FindBookServlet</servlet-name>
+        <jsp-file>/content/find.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FindBookServlet</servlet-name>
+        <url-pattern>/find-book</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReaderJspServlet</servlet-name>
+        <jsp-file>/content/reader.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReaderJspServlet</servlet-name>
+        <url-pattern>/reader</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LibrarianJspServlet</servlet-name>
+        <jsp-file>/content/librarian.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibrarianJspServlet</servlet-name>
+        <url-pattern>/librarian</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>LibrarianServlet</servlet-name>
+        <servlet-class>local.zone.weblibrary.servlet.LibrarianServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LibrarianServlet</servlet-name>
+        <url-pattern>/librarian/info</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReaderServlet</servlet-name>
+        <servlet-class>local.zone.weblibrary.servlet.ReaderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReaderServlet</servlet-name>
+        <url-pattern>/reader/info</url-pattern>
+    </servlet-mapping>
+
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
 </web-app>

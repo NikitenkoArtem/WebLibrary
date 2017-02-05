@@ -3,7 +3,9 @@ package local.zone.weblibrary.db.entity;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by artem on 2.2.17.
@@ -28,6 +30,8 @@ public class History implements Serializable {
     @Column(name = "is_book_come_back", nullable = false)
     @XmlElement
     private Boolean isBookComeBack;
+    @OneToMany(mappedBy = "books", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Book> books = new HashSet<>();
 
     public History() {
     }
@@ -68,6 +72,22 @@ public class History implements Serializable {
 
     public void setBookComeBack(Boolean bookComeBack) {
         isBookComeBack = bookComeBack;
+    }
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
+
+    public void addBook(Book book) {
+        books.add(book);
+    }
+
+    public void removeBook(Book book) {
+        books.add(book);
     }
 
     @Override

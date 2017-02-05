@@ -1,6 +1,10 @@
 package local.zone.weblibrary.servlet;
 
-import local.zone.weblibrary.db.dao.impl.LibraryDaoImpl;
+import local.zone.weblibrary.db.dao.BookDao;
+import local.zone.weblibrary.db.dao.LibraryDao;
+import local.zone.weblibrary.db.entity.Author;
+import local.zone.weblibrary.db.entity.Book;
+import local.zone.weblibrary.db.entity.Person;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import javax.servlet.ServletException;
@@ -17,7 +21,8 @@ import java.io.PrintWriter;
 @WebServlet(urlPatterns = "/servlet")
 public class ReaderServlet extends HttpServlet {
     private GenericXmlApplicationContext context;
-    private LibraryDaoImpl libraryDao;
+    private LibraryDao libraryDao;
+    private BookDao bookDao;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,19 +31,7 @@ public class ReaderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String username = request.getParameter("username");
-        if (username == null || "".equals(username)) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
-        } else {
 
-
-
-
-            response.setContentType("application/xml");
-            try (PrintWriter writer = response.getWriter()) {
-//                writer.write();
-            }
-        }
     }
 
     @Override
